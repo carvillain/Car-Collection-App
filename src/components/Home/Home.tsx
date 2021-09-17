@@ -2,7 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import car_image from '../../assets/images/mclaren.jpg';
-import logo from '../../assets/images/images.png';
+import { classicNameResolver } from 'typescript';
+
 import { Link } from 'react-router-dom';
 
 interface Props{
@@ -75,12 +76,21 @@ export const Home = (props:Props) => {
                         <li>
                             <a href="/" className={classes.nav_a}>Home</a>
                         </li>
-                        <li>
-                            <a href="/garage" className={classes.nav_a}>Garage</a>
-                        </li>
-                        <li>
-                            <a href="/signin" className={classes.nav_a}>Sign In</a>
-                        </li>
+                        {/* <Suspense fallback={'loading...'}>
+                            <AuthCheck fallback = { */}
+                                <li>
+                                    <a href="/signin" className={classes.nav_a}>Sign In</a>
+                                </li>
+                                {/* }> */}
+                            
+                            <li>
+                                <a href="/garage" className={classes.nav_a}>Garage</a>
+                            </li>
+                            <li>
+                                <a href="/signin" className={classes.nav_a}>Sign Out</a>
+                            </li>
+                            {/* </AuthCheck>
+                        </Suspense> */}
                     </ul>
                 </div>
             </nav>

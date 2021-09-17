@@ -2,7 +2,6 @@ import React, { useState} from 'react';
 import { Drawer as MUIDrawer, 
     ListItem, 
     List, 
-    ListItemIcon, 
     ListItemText, 
     Theme,
     useTheme, 
@@ -13,15 +12,21 @@ import { Drawer as MUIDrawer,
     IconButton,
     Typography,
     Divider,
-    Button
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle
 } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import clsx from 'clsx';
-import { RouteComponentProps, withRouter, Switch, Route } from "react-router-dom";
-import { DataTable } from '../../components';
+import { RouteComponentProps, withRouter } from "react-router-dom";
+import { DataTable, CarForm } from '../../components';
+
 
 const drawerWidth = 240;
 
@@ -102,6 +107,7 @@ interface GarageProps{
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = useState(false);
+    const [dialogOpen, setDialogOpen] = useState(false);
   
     const handleDrawerOpen = () => {
       setOpen(true);
@@ -110,6 +116,14 @@ interface GarageProps{
     const handleDrawerClose = () => {
       setOpen(false);
     };
+
+    const handleDialogClickOpen = () => {
+      setDialogOpen(true);
+    }
+
+    const handleDialogClickClose = () => {
+      setDialogOpen(false);
+    }
   
     const itemsList = [
       {
@@ -144,7 +158,18 @@ interface GarageProps{
             <Typography variant="h6" noWrap>
               Garage
             </Typography>
-            <Button className={classes.toolbar_button}>Create New Car</Button>
+            <Button className={classes.toolbar_button} onClick ={handleDialogClickOpen}>Create New Car</Button>
+              <Dialog open={dialogOpen} onClose = {handleDialogClickClose} aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title">Create New Car</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>Create New Car</DialogContentText>
+                    <CarForm />
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick = {handleDialogClickClose} color="primary">Cancel</Button>
+                  <Button onClick = {handleDialogClickClose} color="primary">Done</Button>
+                </DialogActions>
+              </Dialog>
           </Toolbar>
         </AppBar>
         <MUIDrawer
